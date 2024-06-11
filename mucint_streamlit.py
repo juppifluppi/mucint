@@ -44,7 +44,7 @@ def cooling_highlight(val):
    color = 'green' if val == 8 else "green" if val == 7 else "green" if val == 6 else "green" if val == "X1" else "yellow" if val == 5 else "yellow" if val == 4  else "yellow" if val == 3 else "red" if val == 2 else "red" if val == 1 else "red" if val == 0 else "red" if val == "X0" else "grey" if val == "AD" else "white"                    
    return f'background-color: {color}'
 
-st.title('TC/L interaction probability model')
+st.title('MUC2 interaction probability model')
 
 with st.form(key='my_form_to_submit'):
     with st.expander("More information"):

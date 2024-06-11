@@ -104,7 +104,7 @@ if submit_button:
             f.write("\n")
                                                                                  
         process3 = subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        result3 = process3.communicate()
+        process3.communicate()
                                            
         df2 = pd.read_csv(r'results.csv')
         st.write(head(df2))

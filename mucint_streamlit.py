@@ -88,7 +88,7 @@ if submit_button:
     
         SMI=SMI
                                  
-        mol = standardize(SMILES[molecule])
+        mol = standardize(SMI)
         maccskeys = MACCSkeys.GenMACCSKeys(mol)            
 
         with open("descriptors.csv","a") as f:

@@ -82,69 +82,30 @@ if submit_button:
             lock.acquire()
     
     try:
-        for es in ["descriptors.csv","options.csv","create_formulations_temp.R","fin_results.csv","fin_results2.csv","db_test.csv","testformulations.dat","db_formulations.csv"]:
+        for es in ["descriptors.csv"]:
             try:
                 os.remove(es)
             except:
                 pass
     
         SMI=SMI
-                          
-         for molecule in range(0,len(SMILES)):            
-                                    
-             mol = standardize(SMILES[molecule])
+                                 
+        mol = standardize(SMILES[molecule])
+        maccskeys = MACCSkeys.GenMACCSKeys(mol)            
+
+        with open("descriptors.csv","a") as f:
+            for o in range(0,len(maccskeys)):
+                f.write("maccs_"+str(o)+"\t")    
+            f.write("\n")  
             
-                        if molecule == 0:
-                            with open("descriptors.csv","a") as f:
-                                for o in range(0,len(rdkitfp)):
-                                    f.write("rdk7_"+str(o)+"\t")
-                                for o in range(0,len(rdkitfp2)):
-                                    f.write("rdk5_"+str(o)+"\t")
-                                for o in calc(mol).asdict().keys():
-                                    f.write(str(o)+"\t")
-                                f.write("\n")
-            
-                        with open("descriptors.csv","a") as f:
-                            for o in range(0,len(rdkitfp)):
-                                f.write(str(rdkitfp[o])+"\t")
-                            for o in range(0,len(rdkitfp2)):
-                                f.write(str(rdkitfp2[o])+"\t")
-                            for o in calc(mol).asdict().values():
-                                f.write(str(o)+"\t")                
-                            f.write("\n")
-                        
-                        mj = Chem.Descriptors.ExactMolWt(mol)
-                        MW.append(mj)
-                  
-                    dfx = pd.DataFrame(columns=['NAME', "SMILES","MW"])
-                    dfx["NAME"]=NAMES
-                    dfx["SMILES"]=SMILES
-                    dfx["MW"]=MW
-                    
-                    dfx.to_csv("db_test.csv",index=False)
+        with open("descriptors.csv","a") as f:
+            for o in range(0,len(maccskeys)):
+                f.write(str(maccskeys[o])+"\t") 
+            f.write("\n")
+                                                                                 
+        process3 = subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        result3 = process3.communicate()
                                            
-                with st.spinner('CREATING FORMULATION DATABASE (STEP 2 OF 4)...'):
-                    process1 = subprocess.Popen(["Rscript", "create_formulations_temp.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-                    result1 = process1.communicate()
-            
-                with st.spinner('CALCULATING MIXTURE DESCRIPTORS (STEP 3 OF 4)...'):
-                    if choosemodel == 'RDK7-RF [AUC = 0.88, ~1 min]':
-                        process2 = subprocess.Popen(["Rscript", "create_mixtures.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-                        result2 = process2.communicate()
-        
-                    if choosemodel == 'Final models [AUC = 0.91, ~7 min]':
-                        process2 = subprocess.Popen(["Rscript", "create_mixtures2.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-                        result2 = process2.communicate()
-                
-                with st.spinner('CALCULATING PREDICTIONS (STEP 4 OF 4)...'):
-                    if choosemodel == 'RDK7-RF [AUC = 0.88, ~1 min]':
-                        process3 = subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-                        result3 = process3.communicate()
-                        
-                    if choosemodel == 'Final models [AUC = 0.91, ~7 min]':
-                        process3 = subprocess.Popen(["Rscript", "predict2.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-                        result3 = process3.communicate()
-                    
                     df2 = pd.read_csv(r'fin_results2.csv')
                     df2 = df2.rename(columns={0: "POL", 1: "DF", 2: "LC", 3: "LE"})
             

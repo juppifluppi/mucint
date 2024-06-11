@@ -50,8 +50,6 @@ with st.form(key='my_form_to_submit'):
         st.caption(""":black[Background]""")
         st.caption("""mucint predicts interactions of drugs with mucin, based on classifications""")
         
-        st.caption("""Details can be found in our [publication](https://pubs.acs.org/doi/10.1021/acs.molpharmaceut.4c00086) or the open-access [preprint](https://doi.org/10.26434/chemrxiv-2024-l5kvc) of it.""")
-        
         st.caption("""The software is hosted at our [github page](https://github.com/juppifluppi/mucint), licensed under MIT.""")
  
         st.caption("""Version 0.1 (11.06.2024)""")
@@ -75,7 +73,7 @@ if submit_button:
     lock = FileLock("lockfile.lock")
     with st.spinner('WAITING IN QUEUE ...'):
         try:
-            lock.acquire(timeout=420)
+            lock.acquire(timeout=20)
         except Timeout:
             os.remove("lockfile.lock")
             lock = FileLock("lockfile.lock")

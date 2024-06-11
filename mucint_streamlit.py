@@ -109,9 +109,9 @@ if submit_button:
         col1, col2 = st.columns(2)
                     
         with col1: 
-            st.write(str(df2.iloc[0, 1]))
+            st.write(str(df2.iloc[0, 0]))
             st.header("Formulation report")
-            st.write("muc interaction probabilty: "+str(int(df2.iloc[0, 1]*100)))
+            st.write("muc interaction probabilty: "+str(int(df2.iloc[0, 0]*100)))
                             
         with col2:
             im = Draw.MolToImage(Chem.MolFromSmiles(SMI),fitImage=True)

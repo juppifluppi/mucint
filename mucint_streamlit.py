@@ -105,6 +105,8 @@ if submit_button:
         st.write(process3.communicate())
                                            
         df2 = pd.read_csv(r'results.csv')
+        
+        col1, col2 = st.columns(2)
                     
         with col1: 
             st.header("Formulation report")

@@ -44,11 +44,13 @@ def cooling_highlight(val):
    color = 'green' if val == 8 else "green" if val == 7 else "green" if val == 6 else "green" if val == "X1" else "yellow" if val == 5 else "yellow" if val == 4  else "yellow" if val == 3 else "red" if val == 2 else "red" if val == 1 else "red" if val == 0 else "red" if val == "X0" else "grey" if val == "AD" else "white"                    
    return f'background-color: {color}'
 
+st.title('TC/L interaction probability model')
+
 with st.form(key='my_form_to_submit'):
     with st.expander("More information"):
         
         st.caption(""":black[Background]""")
-        st.caption("""mucint predicts interactions of drugs with mucin, based on classifications""")
+        st.caption("""mucint predicts interactions of drugs with mucin, based on classifications derived from ¹H-NMR measurements with MUC2. It is based on a logistic regression model, using five different MACCS keys as descriptors.""")
         
         st.caption("""The software is hosted at our [github page](https://github.com/juppifluppi/mucint), licensed under MIT.""")
  
@@ -109,9 +111,7 @@ if submit_button:
         col1, col2 = st.columns(2)
                     
         with col1: 
-            st.write(str(df2.iloc[0, 0]))
-            st.header("Formulation report")
-            st.write("muc interaction probabilty: "+str(int(df2.iloc[0, 0]*100)))
+            st.write("MUC2 interaction probabilty: "+str(int(df2.iloc[0, 0]*100))+" %")
                             
         with col2:
             im = Draw.MolToImage(Chem.MolFromSmiles(SMI),fitImage=True)

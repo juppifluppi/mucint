@@ -105,16 +105,10 @@ if submit_button:
         st.write(process3.communicate())
                                            
         df2 = pd.read_csv(r'results.csv')
-        st.write(head(df2))
                     
         with col1: 
             st.header("Formulation report")
-            st.write("Maximum solubilized drug: "+str(round(max(SDcx),1))+" g/L at "+str(df3.loc[SDcx.idxmax(), "DF"])+" g/L drug feed (LE: "+str(finalLE)+" %, LC: "+str(finalLC)+" %)")
-            max_values = df3.groupby('POL')['SD'].max()
-            max_value = max_values.max()
-            keys_with_max_value = max_values[max_values == max_value].index.tolist()
-            comma_separated_keys = ', '.join(str(key) for key in keys_with_max_value)
-            st.write(comma_separated_keys)
+            st.write("muc interaction probabilty: "+str(df2))
             
                             
         with col2:

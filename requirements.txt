@@ -6,3 +6,5 @@ scipy
 seaborn
 numpy
 mordredcommunity
+streamlit-ketcher
+filelock

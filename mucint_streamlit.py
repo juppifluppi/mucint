@@ -44,29 +44,17 @@ def cooling_highlight(val):
    color = 'green' if val == 8 else "green" if val == 7 else "green" if val == 6 else "green" if val == "X1" else "yellow" if val == 5 else "yellow" if val == 4  else "yellow" if val == 3 else "red" if val == 2 else "red" if val == 1 else "red" if val == 0 else "red" if val == "X0" else "grey" if val == "AD" else "white"                    
    return f'background-color: {color}'
 
-st.image('logo.png')
-
 with st.form(key='my_form_to_submit'):
     with st.expander("More information"):
         
         st.caption(""":black[Background]""")
-        st.caption("""POxload is a web tool to evaluate the amount of drug solubilized by amphiphilic, triblock copolymeric poly(oxazoline)/poly(oxazine) (pOx/pOzi) micelles.
-        It is based on predictions for loading efficiency (LE) and loading capacity (LC) using four different thresholds for each parameter (LC 10/20/30/40%, LE 20/40/60/80%).
-        The formulations are assumed to be made via thin-film hydration using ethanol as solvent and an elevated temperature of 55 °C during re-hydration.""")
-        
-        st.caption(""":black[Program usage]""")
-        st.caption("""Enter the SMILES code of a drug (and potential co-formulated compounds) and select the polymers of interest. Alternatively, get a list of predictions for multiple drugs using the batch mode, or evaluate long-term storage of a drug for a specific polymer.
-        A formulation report is generated, outputting predictions for all models, given a polymer feed of 10 g/L and drug feeds of 2-10 g/L. Passed thresholds are marked as "X1" in the resulting table, those outside of the model applicability as "AD".""")
-        
-        st.caption(""":black[Model choice]""")
-        st.caption("""Final prediction models provided the highest accuracy on external data, but require initialization of the xgboost package.
-        RDK7-RF models showed slightly lower accuracy, but provide faster computation and a larger applicability (suitable for drugs where final models show "AD" classifications).""") 
+        st.caption("""mucint predicts interactions of drugs with mucin, based on classifications""")
         
         st.caption("""Details can be found in our [publication](https://pubs.acs.org/doi/10.1021/acs.molpharmaceut.4c00086) or the open-access [preprint](https://doi.org/10.26434/chemrxiv-2024-l5kvc) of it.""")
         
-        st.caption("""The software is hosted at our [github page](https://github.com/juppifluppi/poxload), licensed under MIT.""")
+        st.caption("""The software is hosted at our [github page](https://github.com/juppifluppi/mucint), licensed under MIT.""")
  
-        st.caption("""Version 1.0 (28.05.2024)""")
+        st.caption("""Version 0.1 (11.06.2024)""")
  
     SMI = st.text_input('Enter [SMILES code](https://pubchem.ncbi.nlm.nih.gov//edit3/index.html) of drug to load', '') 
     
@@ -78,45 +66,8 @@ with st.form(key='my_form_to_submit'):
     if on:
         SMI=drawer
     
-    col1, col2 = st.columns(2)
-    with col1:
-        SMI2 = st.text_input('Add co-formulated drug:', '')
-        
-    with col2:        
-        numberSD2 = st.number_input('Drug feed of co-formulated drug',min_value=0, max_value=12, value="min", step=2)
-
-    on2 = st.toggle('Use drawn structure',key="15")    
-    with st.expander("SMILES editor"):
-        drawer2 = st_ketcher(key="14")
-        st.caption("Click on Apply to save the drawn structure as input.")  
-    if on2:
-        SMI2=drawer2
-    
-    options = st.multiselect(
-        'Polymers to calculate loading for',
-        options=["A-cPrOx-A","A-cPrOzi-A","A-nPrOx-A","A-nPrOzi-A","A-iPrOx-A","A-iPrOzi-A","A-cPrMeOx-A","A-cPrMeOzi-A","A-nBuOx-A","A-nBuOzi-A","A-iBuOx-A","A-iBuOzi-A","A-sBuOx-A","A-sBuOzi-A","A-PentOx-A","A*-nPrOzi-A*","A*-nBuOx-A*","A-BzOx-A","A-BzOzi-A","A-PhOx-A","A-PhOzi-A","A-EtHepOx-A","A-EtHepOzi-A","A-nNonOx-A","A-nNonOzi-A"],
-        default=["A-nPrOx-A","A-nPrOzi-A","A-nBuOx-A","A-nBuOzi-A"])
-
-    choosemodel = st.selectbox('Models to use:',
-                         ('Final models [AUC = 0.91, ~7 min]','RDK7-RF [AUC = 0.88, ~1 min]'))
-
-    on3 = st.toggle('Perform batch calculation',key="16")    
-    with st.expander("Batch settings"):
-        col1, col2 = st.columns(2)
-        with col1:
-            st.write("Names of compounds")
-            NAMESx = st.text_area(label="Input names of compounds separated by linebreaks",key="17")
-        with col2:
-            st.write("SMILES codes")
-            SMILESx = st.text_area(label="Input SMILES of compounds separated by linebreaks",key="18")
-
-    on4 = st.toggle('Predict long-term storage',key="19")    
-    with st.expander("Settings"):
-        options2 = st.selectbox('Select polymer for 0-30 days storage:',
-                         ("A-nBuOx-A","A-nBuOzi-A","A-nPrOx-A","A-nPrOzi-A","A-cPrOx-A","A-cPrOzi-A","A-iPrOx-A","A-iPrOzi-A","A-cPrMeOx-A","A-cPrMeOzi-A","A-iBuOx-A","A-iBuOzi-A","A-sBuOx-A","A-sBuOzi-A","A-PentOx-A","A*-nPrOzi-A*","A*-nBuOx-A*","A-BzOx-A","A-BzOzi-A","A-PhOx-A","A-PhOzi-A","A-EtHepOx-A","A-EtHepOzi-A","A-nNonOx-A","A-nNonOzi-A"))
-
-    emoji = '💊'
-    label = ' Formulate!'    
+    emoji = ''
+    label = ' Predict'    
     submit_button = st.form_submit_button(label=f'{emoji} {label}')
 
 if submit_button:
@@ -138,41 +89,10 @@ if submit_button:
                 pass
     
         SMI=SMI
-        SMI2=SMI2
-        numberSD2=numberSD2
-        NAMESx=NAMESx
-        SMILESx=SMILESx
-        NAMES=["MeOx","EtOx","nPrOx","nBuOx","iBuOx","cPrOx","iPrOx","cPrMeOx","sBuOx","EtHepOx","nNonOx","PhOx","PentOx","nPrOzi","nBuOzi","iBuOzi","cPrOzi","iPrOzi","cPrMeOzi","sBuOzi","EtHepOzi","nNonOzi","PhOzi","BzOx","BzOzi","PhenOx","PhenOzi","Pid","EIP","PgMeOx","Pip","PipBoc","nBuEnOx","nBuOxPh","nBuOxNH2","nBuOxCOOH","PcBOx","OH","NH2","rEtEtOx","sEtEtOx","EtEtOx","rPrMeOx","sPrMeOx","PrMeOx","Bz"]
-        SMILES=["CC(=O)N(C)CC","CCC(=O)N(C)CC","CCCC(=O)N(C)CC","CCCCC(=O)N(C)CC","CC(C)CC(=O)N(C)CC","CCN(C)C(=O)C1CC1","CC(C)C(=O)N(C)CC","CCN(C)C(=O)CC1CC1","CCC(C)C(=O)N(C)CC","CCCCC(CC)CCC(=O)N(C)CC","CCCCCCCCCC(=O)N(C)CC","CCN(C)C(=O)c1ccccc1","CCCCCC(=O)N(C)CC","CCCC(=O)N(C)CCC","CCCCC(=O)N(C)CCC","CC(C)CC(=O)N(C)CCC","CCCN(C)C(=O)C1CC1","CCCN(C)C(=O)C(C)C","CCCN(C)C(=O)CC1CC1","CCC(C)C(=O)N(C)CCC","CCCCC(CC)CCC(=O)N(C)CCC","CCCCCCCCCC(=O)N(C)CCC","CCCN(C)C(=O)c1ccccc1","CCN(C)C(=O)Cc1ccccc1","CCCN(C)C(=O)Cc1ccccc1","CCN(C)C(=O)CCc1ccccc1","CCCN(C)C(=O)CCc1ccccc1","CN1CCCCC1","CCOC(=O)C1CCN(C)CC1","C#CCCN(C)C(C)=O","CN1CCNCC1","CN1CCN(C(=O)OC(C)(C)C)CC1","C=CCCC(=O)N(C)CC","CCN(C)C(=O)CCCCSCc1ccccc1","CCN(C)C(=O)CCCCSCC(=O)O","CCN(C)C(=O)CCCCSCC(=O)O","CCN(C)C(=O)CCc1nc(N)nc(N(C)C)n1","CO","CN","CCC(=O)N(C)[C@H](C)CC","CCC(=O)N(C)[C@@H](C)CC","CCC(=O)N(C)C(C)CC","CCCC(=O)N(C)[C@H](C)C","CCCC(=O)N(C)[C@@H](C)C","CCCC(=O)N(C)C(C)C","Cc1ccccc1"]
-        MW=[]
-        
-        # try:
-        if on3 is False:
-            if on4 is False:
-                os.system("cp create_formulations.R create_formulations_temp.R")
-                if len(SMI2) > 2:
-                    NAMES.insert(0, "CO-COMPOUND")
-                    SMILES.insert(0, SMI2)
-                    tune_DF=str("sed -i -e 's/XXXX/"+str(numberSD2)+"/g' create_formulations_temp.R")
-                    os.system(tune_DF)
-            
-                file_path = 'options.csv'
-                with open(file_path, 'w') as file:
-                    for item in options:
-                        file.write(str(item) + '\n')
-                
-                NAMES.append("COMPOUND")
-                SMILES.append(SMI)
-                
-                with st.spinner('CALCULATING DESCRIPTORS (STEP 1 OF 4)...'):
-                    
-                    for molecule in range(0,len(SMILES)):            
+                          
+         for molecule in range(0,len(SMILES)):            
                                     
-                        mol = standardize(SMILES[molecule])
-                        AllChem.EmbedMolecule(mol,useRandomCoords=True)
-                        AllChem.MMFFOptimizeMolecule(mol, "MMFF94s", maxIters=5000)
-                        rdkitfp = fingerprint_rdk7(mol)
-                        rdkitfp2 = fingerprint_rdk5(mol)
+             mol = standardize(SMILES[molecule])
             
                         if molecule == 0:
                             with open("descriptors.csv","a") as f:

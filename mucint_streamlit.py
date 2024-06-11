@@ -102,7 +102,7 @@ if submit_button:
             f.write("\n")
                                                                                  
         process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        st.write(process3.communicate())
+        process3.communicate()
                                            
         df2 = pd.read_csv(r'results.csv')
         
@@ -110,8 +110,7 @@ if submit_button:
                     
         with col1: 
             st.header("Formulation report")
-            st.write("muc interaction probabilty: "+str(df2))
-            
+            st.write("muc interaction probabilty: "+str(int(df2[1,1]*100)))
                             
         with col2:
             im = Draw.MolToImage(Chem.MolFromSmiles(SMI),fitImage=True)

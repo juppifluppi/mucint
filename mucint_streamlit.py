@@ -58,9 +58,9 @@ with st.form(key='my_form_to_submit'):
  
     SMI = st.text_input('Enter [SMILES code](https://pubchem.ncbi.nlm.nih.gov//edit3/index.html) of drug to load', '') 
     
-    on = st.toggle('Use drawn structure',key="1")
+    on = st.toggle('Use drawn structure')
     with st.expander("SMILES editor"):
-        drawer = st_ketcher(key="2")
+        drawer = st_ketcher()
         st.caption("Click on Apply to save the drawn structure as input.")
 
     if on:

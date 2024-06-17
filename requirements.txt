@@ -8,3 +8,4 @@ numpy
 mordredcommunity
 streamlit-ketcher
 filelock
+python==3.8.10

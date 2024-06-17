@@ -4,7 +4,7 @@ pandas
 matplotlib
 scipy
 seaborn
-numpy==1.19
+numpy
 mordredcommunity
 streamlit-ketcher
 filelock

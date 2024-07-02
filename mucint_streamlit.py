@@ -19,7 +19,7 @@ import uuid
 from filelock import Timeout, FileLock
 
 def cooling_highlight(val):
-   color = 'green' if val > 49 else "red"                    
+   color = "red" if val < 50 else "green"                    
    return f'background-color: {color}'
 
 calc = Calculator(descriptors, ignore_3D=False)

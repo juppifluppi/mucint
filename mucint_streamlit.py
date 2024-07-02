@@ -177,13 +177,13 @@ if submit_button:
            df2 = pd.read_csv(r'results.csv')
         
         
-           dfx = pd.DataFrame(columns=['NAME', "PROB"])
-           dfx["NAME"]=NAMESx
-           dfx["PROB"]=df2.iloc[:, 0]
+           dfx = pd.DataFrame(columns=['Compound', "MUC2 interaction probability"])
+           dfx["Compound"]=NAMESx
+           dfx["MUC2 interaction probability"]=int(df2.iloc[:, 0]*100)
 
     
            #dfx.reset_index(inplace=True)               
-           st.dataframe(dfx.style.applymap(cooling_highlight,subset=["PROB"]))    
+           st.dataframe(dfx.style.applymap(cooling_highlight,subset=["MUC2 interaction probability"]))    
     
     finally:
         lock.release()

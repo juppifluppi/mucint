@@ -141,6 +141,9 @@ if submit_button:
                 except:
                     pass
 
+        except:
+            pass
+   
     if on3 is True:
         try:
             for es in ["descriptors.csv"]:
@@ -181,6 +184,9 @@ if submit_button:
             dfx.reset_index(inplace=True)               
             st.dataframe(dfx.style.applymap(cooling_highlight,subset=["PROB"]))    
 
+   
+        except:
+            pass
     
     finally:
         lock.release()

@@ -182,7 +182,7 @@ if submit_button:
            dfx["PROB"]=df2.iloc[:, 0]
 
     
-           dfx.reset_index(inplace=True)               
+           #dfx.reset_index(inplace=True)               
            st.dataframe(dfx.style.applymap(cooling_highlight,subset=["PROB"]))    
     
     finally:

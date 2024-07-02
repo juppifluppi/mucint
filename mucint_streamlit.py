@@ -99,12 +99,11 @@ if submit_button:
 
     if on3 is False:
     
-        try:
-            for es in ["descriptors.csv"]:
-                try:
-                    os.remove(es)
-                except:
-                    pass
+        for es in ["descriptors.csv"]:
+            try:
+                os.remove(es)
+            except:
+                pass
     
         SMI=SMI
                                  
@@ -142,12 +141,12 @@ if submit_button:
                 pass
    
     if on3 is True:
-        try:
-            for es in ["descriptors.csv"]:
-                try:
-                    os.remove(es)
-                except:
-                    pass
+
+       for es in ["descriptors.csv"]:
+            try:
+                os.remove(es)
+            except:
+                pass
 
         for cx in range(0,length(SMILESx)):
             SMI=SMILESx[cx]

@@ -154,7 +154,6 @@ if submit_button:
 
            for cx in range(0,len(SMILESx)):
                SMI=SMILESx[cx]
-               st.write(SMI)
                           
                mol = standardize(SMI)
                maccskeys = MACCSkeys.GenMACCSKeys(mol)            

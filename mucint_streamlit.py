@@ -143,6 +143,9 @@ if submit_button:
    
         if on3 is True:
 
+           SMILESx=SMILESx.split('\n')           
+           NAMESx=NAMESx.split('\n')
+
            for es in ["descriptors.csv"]:
                 try:
                     os.remove(es)

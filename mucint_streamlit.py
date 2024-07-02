@@ -179,7 +179,7 @@ if submit_button:
         
            dfx = pd.DataFrame(columns=['Compound', "MUC2 interaction probability"])
            dfx["Compound"]=NAMESx
-           dfx["MUC2 interaction probability"]=dfx.iloc[:, 0].astype(int)
+           dfx["MUC2 interaction probability"]=pd.to_numeric(df2.iloc[:, 0], errors='coerce').astype('Int64')
 
     
            #dfx.reset_index(inplace=True)               

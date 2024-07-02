@@ -106,43 +106,40 @@ if submit_button:
                 except:
                     pass
     
-            SMI=SMI
+        SMI=SMI
                                  
-            mol = standardize(SMI)
-            maccskeys = MACCSkeys.GenMACCSKeys(mol)            
+        mol = standardize(SMI)
+        maccskeys = MACCSkeys.GenMACCSKeys(mol)            
 
-            with open("descriptors.csv","a") as f:
-                for o in range(0,len(maccskeys)):
-                    f.write("maccs_"+str(o)+"\t")    
-                f.write("\n")  
+        with open("descriptors.csv","a") as f:
+            for o in range(0,len(maccskeys)):
+                f.write("maccs_"+str(o)+"\t")    
+            f.write("\n")  
                 
-            with open("descriptors.csv","a") as f:
-                for o in range(0,len(maccskeys)):
-                    f.write(str(maccskeys[o])+"\t") 
-                f.write("\n")
+        with open("descriptors.csv","a") as f:
+            for o in range(0,len(maccskeys)):
+                f.write(str(maccskeys[o])+"\t") 
+            f.write("\n")
                                                                                  
-            process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-            process3.communicate()
-                                           
-            df2 = pd.read_csv(r'results.csv')
+        process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process3.communicate()
+                                          
+        df2 = pd.read_csv(r'results.csv')
         
-            col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
                     
-            with col1: 
-                st.write("MUC2 interaction probabilty: "+str(int(df2.iloc[0, 0]*100))+" %")
+        with col1: 
+            st.write("MUC2 interaction probabilty: "+str(int(df2.iloc[0, 0]*100))+" %")
                             
-            with col2:
-                im = Draw.MolToImage(Chem.MolFromSmiles(SMI),fitImage=True)
-                st.image(im)
+        with col2:
+            im = Draw.MolToImage(Chem.MolFromSmiles(SMI),fitImage=True)
+            st.image(im)
             
-            for es in ["descriptors.csv","results.csv"]:
-                try:
-                    os.remove(es)
-                except:
-                    pass
-
-        except:
-            pass
+        for es in ["descriptors.csv","results.csv"]:
+            try:
+                os.remove(es)
+            except:
+                pass
    
     if on3 is True:
         try:
@@ -152,41 +149,37 @@ if submit_button:
                 except:
                     pass
 
-            for cx in range(0,length(SMILESx)):
-                SMI=SMILESx[cx]
-                           
-                mol = standardize(SMI)
-                maccskeys = MACCSkeys.GenMACCSKeys(mol)            
+        for cx in range(0,length(SMILESx)):
+            SMI=SMILESx[cx]
+                          
+            mol = standardize(SMI)
+            maccskeys = MACCSkeys.GenMACCSKeys(mol)            
 
-                if cx == 0:
+            if cx == 0:
 
-                    with open("descriptors.csv","a") as f:
-                        for o in range(0,len(maccskeys)):
-                            f.write("maccs_"+str(o)+"\t")    
-                        f.write("\n")  
-                
                 with open("descriptors.csv","a") as f:
                     for o in range(0,len(maccskeys)):
-                        f.write(str(maccskeys[o])+"\t") 
-                    f.write("\n")
+                        f.write("maccs_"+str(o)+"\t")    
+                    f.write("\n")  
+                
+            with open("descriptors.csv","a") as f:
+                for o in range(0,len(maccskeys)):
+                    f.write(str(maccskeys[o])+"\t") 
+                f.write("\n")
             
-            process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-            process3.communicate()
+        process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        process3.communicate()
                                            
-            df2 = pd.read_csv(r'results.csv')
+        df2 = pd.read_csv(r'results.csv')
         
         
-            dfx = pd.DataFrame(columns=['NAME', "PROB"])
-            dfx["NAME"]=NAMESx
-            dfx["PROB"]=df2.iloc[:, 0]
+        dfx = pd.DataFrame(columns=['NAME', "PROB"])
+        dfx["NAME"]=NAMESx
+        dfx["PROB"]=df2.iloc[:, 0]
 
     
-            dfx.reset_index(inplace=True)               
-            st.dataframe(dfx.style.applymap(cooling_highlight,subset=["PROB"]))    
-
-   
-        except:
-            pass
+        dfx.reset_index(inplace=True)               
+        st.dataframe(dfx.style.applymap(cooling_highlight,subset=["PROB"]))    
     
     finally:
         lock.release()

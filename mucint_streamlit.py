@@ -166,22 +166,22 @@ if submit_button:
                    f.write(str(maccskeys[o])+"\t") 
                f.write("\n")
             
-        process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        process3.communicate()
+       process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+       process3.communicate()
                                            
-        df2 = pd.read_csv(r'results.csv')
+       df2 = pd.read_csv(r'results.csv')
         
         
-        dfx = pd.DataFrame(columns=['NAME', "PROB"])
-        dfx["NAME"]=NAMESx
-        dfx["PROB"]=df2.iloc[:, 0]
+       dfx = pd.DataFrame(columns=['NAME', "PROB"])
+       dfx["NAME"]=NAMESx
+       dfx["PROB"]=df2.iloc[:, 0]
 
     
-        dfx.reset_index(inplace=True)               
-        st.dataframe(dfx.style.applymap(cooling_highlight,subset=["PROB"]))    
+       dfx.reset_index(inplace=True)               
+       st.dataframe(dfx.style.applymap(cooling_highlight,subset=["PROB"]))    
     
     finally:
-        lock.release()
+       lock.release()
 
 #    except:
 #        st.write("Something went wrong. Cannot parse molecules! Please verify your structures.")  

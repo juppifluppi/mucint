@@ -148,23 +148,23 @@ if submit_button:
             except:
                 pass
 
-        for cx in range(0,length(SMILESx)):
-            SMI=SMILESx[cx]
+       for cx in range(0,length(SMILESx)):
+           SMI=SMILESx[cx]
                           
-            mol = standardize(SMI)
-            maccskeys = MACCSkeys.GenMACCSKeys(mol)            
+           mol = standardize(SMI)
+           maccskeys = MACCSkeys.GenMACCSKeys(mol)            
 
-            if cx == 0:
+           if cx == 0:
 
-                with open("descriptors.csv","a") as f:
-                    for o in range(0,len(maccskeys)):
-                        f.write("maccs_"+str(o)+"\t")    
-                    f.write("\n")  
+               with open("descriptors.csv","a") as f:
+                   for o in range(0,len(maccskeys)):
+                       f.write("maccs_"+str(o)+"\t")    
+                   f.write("\n")  
                 
-            with open("descriptors.csv","a") as f:
-                for o in range(0,len(maccskeys)):
-                    f.write(str(maccskeys[o])+"\t") 
-                f.write("\n")
+           with open("descriptors.csv","a") as f:
+               for o in range(0,len(maccskeys)):
+                   f.write(str(maccskeys[o])+"\t") 
+               f.write("\n")
             
         process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         process3.communicate()

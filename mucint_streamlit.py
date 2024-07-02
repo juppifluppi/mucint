@@ -149,7 +149,7 @@ if submit_button:
                 except:
                     pass
 
-           for cx in range(0,length(SMILESx)):
+           for cx in range(0,len(SMILESx)):
                SMI=SMILESx[cx]
                           
                mol = standardize(SMI)

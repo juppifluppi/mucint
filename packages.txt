@@ -4,3 +4,4 @@ r-base-dev
 r-base-core
 r-cran-caret
 default-jre-headless
+r-cran-randomforest

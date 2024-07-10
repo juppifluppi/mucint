@@ -100,7 +100,7 @@ if submit_button:
     try:
         if on3 is False:
     
-            for es in ["descriptors.csv"]:
+            for es in ["descriptors.csv","results.csv","results2.csv"]:
                 try:
                     os.remove(es)
                 except:
@@ -137,7 +137,7 @@ if submit_button:
                 im = Draw.MolToImage(Chem.MolFromSmiles(SMI),fitImage=True)
                 st.image(im)
             
-            for es in ["descriptors.csv","results.csv"]:
+            for es in ["descriptors.csv","results.csv","results2.csv"]:
                 try:
                     os.remove(es)
                 except:
@@ -184,7 +184,6 @@ if submit_button:
            dfx["MUC2 interaction probability"]=dfx.iloc[:, 1].astype(int)
 
            dfx["+bile"]=(df3.iloc[:, 0].astype(float))*100
-           st.write((df3.iloc[:, 0].astype(float))*100)
            dfx["+bile"]=dfx.iloc[:, 2].astype(int)
     
            #dfx.reset_index(inplace=True)               

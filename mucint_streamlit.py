@@ -123,7 +123,6 @@ if submit_button:
                                                                                      
             process3=subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             process3.communicate()
-            st.write(process3)
            
             df2 = pd.read_csv(r'results.csv')
             df3 = pd.read_csv(r'results2.csv')

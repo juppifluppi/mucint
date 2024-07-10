@@ -125,11 +125,13 @@ if submit_button:
             process3.communicate()
                                           
             df2 = pd.read_csv(r'results.csv')
-        
+            df3 = pd.read_csv(r'results2.csv')
+           
             col1, col2 = st.columns(2)
                     
             with col1: 
                 st.write("MUC2 interaction probabilty: "+str(int(df2.iloc[0, 0]*100))+" %")
+                st.write("In presence of bile: "+str(int(df3.iloc[0, 0]*100))+" %")               
                             
             with col2:
                 im = Draw.MolToImage(Chem.MolFromSmiles(SMI),fitImage=True)
@@ -174,16 +176,18 @@ if submit_button:
            process3.communicate()
                                            
            df2 = pd.read_csv(r'results.csv')
+           df3 = pd.read_csv(r'results2.csv')        
         
-        
-           dfx = pd.DataFrame(columns=['Compound', "MUC2 interaction probability"])
+           dfx = pd.DataFrame(columns=['Compound', "MUC2 interaction probability", "+bile"])
            dfx["Compound"]=NAMESx
            dfx["MUC2 interaction probability"]=(df2.iloc[:, 0].astype(float))*100
            dfx["MUC2 interaction probability"]=dfx.iloc[:, 1].astype(int)
 
+           dfx["+bile"]=(df3.iloc[:, 0].astype(float))*100
+           dfx["+bile"]=dfx.iloc[:, 1].astype(int)
     
            #dfx.reset_index(inplace=True)               
-           st.dataframe(dfx.style.applymap(cooling_highlight,subset=["MUC2 interaction probability"]))    
+           st.dataframe(dfx.style.applymap(cooling_highlight,subset=["MUC2 interaction probability", "+bile"]))    
     
     finally:
         lock.release()

@@ -54,7 +54,8 @@ with st.form(key='my_form_to_submit'):
     with st.expander("More information"):
         
         st.caption(""":black[Background]""")
-        st.caption("""mucint predicts interactions of drugs with mucin, based on classifications derived from ¹H-NMR measurements with MUC2. It is based on a logistic regression model, using five different MACCS keys as descriptors.""")
+        st.caption("""mucint predicts interactions of drugs with mucin, based on classifications derived from ¹H-NMR measurements with MUC2. It is based on a logistic regression model, using five different MACCS keys as descriptors.
+        Additionally, a predictions of interactions with MUC2 in the presence of bile are listed based on a random-forest model retrained on the same descriptors.""")
         
         st.caption("""The software is hosted at our [github page](https://github.com/juppifluppi/mucint), licensed under MIT.""")
  

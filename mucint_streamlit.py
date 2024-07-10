@@ -187,7 +187,7 @@ if submit_button:
            dfx["+bile"]=dfx.iloc[:, 2].astype(int)
     
            #dfx.reset_index(inplace=True)               
-           st.dataframe(dfx.style.applymap(cooling_highlight,subset=["MUC2 interaction probability", "bile"]))    
+           st.dataframe(dfx.style.applymap(cooling_highlight,subset=["MUC2 interaction probability", "+bile"]))    
     
     finally:
         lock.release()

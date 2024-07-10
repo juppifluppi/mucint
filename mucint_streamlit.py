@@ -121,7 +121,7 @@ if submit_button:
                     f.write(str(maccskeys[o])+"\t") 
                 f.write("\n")
                                                                                      
-            subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            st.write(subprocess.Popen(["Rscript", "predict.R"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True))
             process3.communicate()
            
             df2 = pd.read_csv(r'results.csv')

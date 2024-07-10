@@ -7,3 +7,4 @@ write.table(file="results.csv",as.data.frame(predict(final_model2,data,type="pro
 
 load("finmodel_rfmix.rda")
 write.table(file="results2.csv",as.data.frame(predict(final_model,data,type="prob")$X1),row.names=F)
+print(as.data.frame(predict(final_model,data,type="prob")$X1))

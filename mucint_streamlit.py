@@ -184,7 +184,6 @@ if submit_button:
            dfx["MUC2 interaction probability"]=dfx.iloc[:, 1].astype(int)
 
            dfx["bile"]=(df3.iloc[:, 0].astype(float))*100
-           print(str(df3.iloc[:, 0].astype(float)*100))
            dfx["bile"]=dfx.iloc[:, 2].astype(int)
     
            #dfx.reset_index(inplace=True)               

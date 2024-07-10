@@ -45,7 +45,7 @@ def standardize(smiles):
     return taut_uncharged_parent_clean_mol_addH
 
 def cooling_highlight(val):
-   color = 'green' if val == 8 else "green" if val == 7 else "green" if val == 6 else "green" if val == "X1" else "yellow" if val == 5 else "yellow" if val == 4  else "yellow" if val == 3 else "red" if val == 2 else "red" if val == 1 else "red" if val == 0 else "red" if val == "X0" else "grey" if val == "AD" else "white"                    
+   color = 'green' if val > 49 else "red"                    
    return f'background-color: {color}'
 
 st.title('MUC2 interaction probability model')

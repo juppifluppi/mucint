@@ -2,5 +2,7 @@ name: mucint
 channels:
 - snowflake
 - defaults
+-conda-forge
 dependencies:
 - streamlit=1.31.1
+- rdkit>=2022.09.5

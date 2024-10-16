@@ -1,0 +1,5 @@
+name: mucint
+channels:
+- snowflake
+dependencies:
+- streamlit=1.31.1
